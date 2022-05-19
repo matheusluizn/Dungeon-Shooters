@@ -8,7 +8,9 @@ canvas.height = window.innerHeight;
 const colors = { "Cyan Process": "#5bc0eb", "Minion Yellow": "#fde74c", "Android Green": "#9bc53d", "Madder Lake": "#c3423f", "Raisin Black": "#211a1e" }
 
 const c = canvas.getContext('2d');
-console.log(c)
+console.log("Canvas context:", c)
+
+let points = 0;
 
 class Player {
   constructor(x, y, radius, color) {
@@ -99,7 +101,7 @@ function createEnemies() {
     const enemy = new Enemy(x, y, 50, colors['Cyan Process'], speed);
     enemies.push(enemy);
 
-  }, 1000)
+  }, 2000)
 }
 createEnemies();
 
@@ -118,7 +120,7 @@ window.addEventListener('click', (e) => {
 
 
 function animate() {
-  requestAnimationFrame(animate);
+  let animationId = requestAnimationFrame(animate);
 
   c.clearRect(0, 0, window.innerWidth, window.innerHeight)
 
@@ -129,9 +131,29 @@ function animate() {
     projectile.draw();
   })
 
-  enemies.forEach(enemy => {
+  enemies.forEach((enemy, enemyI) => {
     enemy.update()
     enemy.draw();
+
+    let distance = Math.hypot(player.x - enemy.x, player.y - enemy.y)
+
+    if(distance - enemy.radius - player.radius < 1) {
+      console.log("Collision player");
+      cancelAnimationFrame(animationId);
+    }
+
+    projectiles.forEach((projectile, projectileI) => {
+      let distance = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y)
+      //console.log(distance)
+
+      if (distance - enemy.radius - projectile.radius < 1){
+        setTimeout(() => {
+          console.log("Collision", enemyI)
+          enemies.splice(enemyI, 1)
+          projectiles.splice(projectileI, 1)
+        }, 0);
+      }
+    })
   })   
 
 }
