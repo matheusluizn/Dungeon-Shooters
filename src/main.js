@@ -5,6 +5,7 @@ const canvas = document.getElementById('screen');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+const colors = {"Cyan Process":"5bc0eb","Minion Yellow":"fde74c","Android Green":"9bc53d","Madder Lake":"c3423f","Raisin Black":"211a1e"}
 
 const c = canvas.getContext('2d');
 console.log(c)
