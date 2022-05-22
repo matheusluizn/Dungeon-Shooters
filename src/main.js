@@ -5,7 +5,7 @@ const canvas = document.getElementById('screen');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const colors = { "Cyan Process": "5bc0eb", "Minion Yellow": "fde74c", "Android Green": "9bc53d", "Madder Lake": "c3423f", "Raisin Black": "211a1e" }
+const colors = { "Cyan Process": "#5bc0eb", "Minion Yellow": "#fde74c", "Android Green": "#9bc53d", "Madder Lake": "#c3423f", "Raisin Black": "#211a1e" }
 
 const c = canvas.getContext('2d');
 console.log(c)
@@ -55,6 +55,7 @@ class Enemy {
     this.y = y;
     this.radius = radius;
     this.color = color;
+    this.speed = speed;
   }
 
   draw() {
@@ -83,10 +84,24 @@ const projectiles = [];
 const enemies = [];
 
 function createEnemies() {
-  setTimeout(() => {
-    const enemy = new Enemy();
+  setInterval(() => {
+
+    const y = Math.random() * window.innerHeight;
+    const x = Math.random() * window.innerWidth; 
+
+    const angle = Math.atan2(window.innerHeight / 2 - y, window.innerWidth / 2 - x);
+
+    const speed = {
+      x: Math.cos(angle),
+      y: Math.sin(angle)
+    }
+
+    const enemy = new Enemy(x, y, 50, colors['Cyan Process'], speed);
+    enemies.push(enemy);
+
   }, 1000)
 }
+createEnemies();
 
 window.addEventListener('click', (e) => {
   const angle = Math.atan2(e.clientY - window.innerHeight / 2, e.clientX - window.innerWidth / 2);
@@ -113,6 +128,11 @@ function animate() {
     projectile.update();
     projectile.draw();
   })
+
+  enemies.forEach(enemy => {
+    enemy.update()
+    enemy.draw();
+  })   
 
 }
 animate();
