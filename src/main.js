@@ -5,20 +5,20 @@ const canvas = document.getElementById('screen');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const colors = {"Cyan Process":"5bc0eb","Minion Yellow":"fde74c","Android Green":"9bc53d","Madder Lake":"c3423f","Raisin Black":"211a1e"}
+const colors = { "Cyan Process": "5bc0eb", "Minion Yellow": "fde74c", "Android Green": "9bc53d", "Madder Lake": "c3423f", "Raisin Black": "211a1e" }
 
 const c = canvas.getContext('2d');
 console.log(c)
 
-class Player{
-  constructor(x, y, radius, color){
+class Player {
+  constructor(x, y, radius, color) {
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
   }
-  
-  draw(){
+
+  draw() {
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
@@ -27,8 +27,8 @@ class Player{
 }
 
 
-class Projectile{
-  constructor(x, y, radius, color, speed){
+class Projectile {
+  constructor(x, y, radius, color, speed) {
     this.x = x;
     this.y = y;
     this.radius = radius;
@@ -36,35 +36,35 @@ class Projectile{
     this.speed = speed;
   }
 
-  draw(){
+  draw() {
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
   }
 
-  update(){
+  update() {
     this.x = this.x + this.speed.x;
     this.y = this.y + this.speed.y;
   }
 }
 
-class Enemy{
-  constructor(x, y, radius, color, speed){
+class Enemy {
+  constructor(x, y, radius, color, speed) {
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
   }
-  
-  draw(){
+
+  draw() {
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
   }
 
-  update(){
+  update() {
     this.x = this.x + this.speed.x;
     this.y = this.y + this.speed.y;
   }
@@ -82,30 +82,30 @@ window.addEventListener('resize', () => {
 const projectiles = [];
 const enemies = [];
 
-function createEnemies(){
-  setTimeout(()=> {
+function createEnemies() {
+  setTimeout(() => {
     const enemy = new Enemy();
   }, 1000)
 }
 
 window.addEventListener('click', (e) => {
-    const angle = Math.atan2(e.clientY - window.innerHeight/2, e.clientX - window.innerWidth/2);
+  const angle = Math.atan2(e.clientY - window.innerHeight / 2, e.clientX - window.innerWidth / 2);
 
-    const speed = {
-      x: Math.cos(angle) * 10,
-      y: Math.sin(angle) * 10
-    }
+  const speed = {
+    x: Math.cos(angle) * 10,
+    y: Math.sin(angle) * 10
+  }
 
-    const projectile = new Projectile(window.innerWidth / 2, window.innerHeight / 2, 10, "#9BC53D", speed);
-    projectile.draw();
-    projectiles.push(projectile);
+  const projectile = new Projectile(window.innerWidth / 2, window.innerHeight / 2, 10, "#9BC53D", speed);
+  projectile.draw();
+  projectiles.push(projectile);
 }, { passive: true })
 
 
-function animate(){
+function animate() {
   requestAnimationFrame(animate);
 
-  c.clearRect(0,0, window.innerWidth, window.innerHeight)
+  c.clearRect(0, 0, window.innerWidth, window.innerHeight)
 
   player.draw();
 
@@ -113,6 +113,6 @@ function animate(){
     projectile.update();
     projectile.draw();
   })
-  
+
 }
 animate();
