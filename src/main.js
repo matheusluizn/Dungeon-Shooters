@@ -10,7 +10,12 @@ const colors = { "Cyan Process": "#5bc0eb", "Minion Yellow": "#fde74c", "Android
 const c = canvas.getContext('2d');
 console.log("Canvas context:", c)
 
+import img from "../player.png"
+
 let points = 0;
+
+const image  = new Image(60, 45)
+image.src = img
 
 class Player {
   constructor(x, y, radius, color) {
@@ -21,10 +26,11 @@ class Player {
   }
 
   draw() {
-    c.beginPath();
-    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    c.fillStyle = this.color;
-    c.fill();
+    //c.beginPath();
+    //c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    //c.fillStyle = this.color;
+    //c.fill();
+    c.drawImage(image, this.x, this.y, 48, 64)
   }
 }
 
@@ -73,7 +79,7 @@ class Enemy {
   }
 }
 
-const player = new Player((innerWidth / 2), innerHeight / 2, 50, "#C3423F");
+const player = new Player((innerWidth / 2), innerHeight / 2, 48, "#C3423F");
 player.draw();
 
 window.addEventListener('resize', () => {
