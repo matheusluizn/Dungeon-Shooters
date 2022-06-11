@@ -11,8 +11,7 @@ class GameObject {
         this.y = y;
         this.width = width;
         this.height = height;
-
-        console.log(context)
+        
         this.context = new WeakRef(context);
 
         const imageElement = new Image(width, height);
