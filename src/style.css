@@ -13,7 +13,7 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(http://arcade.lostdecadegames.com/onslaught-arena/img/frame_background.png);
+  background-image: url(../assets/background/background-page.png);
   box-shadow: inset 0  100000px rgba(0, 0, 0, 0.181);
 }
 
@@ -26,7 +26,7 @@ main{
 #screen{
   display: block;
   background-color: #020a13;
-  background-image: url(http://www.lostdecadegames.com/demos/simple_canvas_game/images/background.png);
+  background-image: url(../assets/background/background-forest.png);
   background-size:cover;
 
 }
