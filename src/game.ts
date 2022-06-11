@@ -2,6 +2,7 @@ import { GAME_SCREEN_SIZES } from "./constants";
 import Player from "./classes/Player";
 import Projectile from "./classes/Projectile";
 import Enemy from "./classes/Enemy";
+import SPRITES from "./sprites";
 
 export default class DungeonShooters {
 
@@ -17,7 +18,7 @@ export default class DungeonShooters {
     this.canvas.height = GAME_SCREEN_SIZES.height;
     this.context = this.canvas.getContext("2d")!;
 
-    this.player = new Player(GAME_SCREEN_SIZES.width / 2, GAME_SCREEN_SIZES.height / 2, 30, 55, "../assets/sprites/main-character/wizard-idle.png", this.context);
+    this.player = new Player(GAME_SCREEN_SIZES.width / 2, GAME_SCREEN_SIZES.height / 2, 30, 55, SPRITES.mage.sprite, this.context);
     this.projectiles = [];
     this.enemies = [];
   }
@@ -30,7 +31,7 @@ export default class DungeonShooters {
         y: Math.sin(angle) * 10,
       }
 
-      const projectile = new Projectile(this.player.x, this.player.y, 20, 20, "../assets/sprites/projectile/mage_projectile.png", this.context, speed);
+      const projectile = new Projectile(this.player.x, this.player.y, 20, 20, SPRITES.mage.projectile, this.context, speed);
       this.projectiles.push(projectile);
     });
 
