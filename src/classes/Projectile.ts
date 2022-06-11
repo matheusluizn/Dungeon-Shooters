@@ -1,10 +1,5 @@
 import GameObject from "./GameObject";
-
-interface IShowSpeed{
-    x: number;
-    y: number;
-}
-
+import { IShowSpeed } from "./interfaces";
 class Projectile extends GameObject {
     speed: IShowSpeed;
     constructor(x: number, y: number, width: number, height: number, image: string, context: CanvasRenderingContext2D, speed: IShowSpeed) {
@@ -13,8 +8,8 @@ class Projectile extends GameObject {
     }
 
     public update() {
-        this.x +=  this.speed.x;
-        this.y +=  this.speed.y;
+        this.x += this.speed.x;
+        this.y += this.speed.y;
     }
 }
 
