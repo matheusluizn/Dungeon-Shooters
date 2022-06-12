@@ -6,6 +6,11 @@ class Enemy extends GameObject {
         super(x, y, width, height, image, context);
         this.speed = speed;
     }
+
+    public update() {
+        this.x += this.speed.x;
+        this.y += this.speed.y; 
+    }
 }
 
 export default Enemy;
